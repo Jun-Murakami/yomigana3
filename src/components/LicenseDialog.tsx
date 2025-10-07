@@ -102,7 +102,6 @@ export function LicenseDialog({
               <TableHead>
                 <TableRow>
                   <TableCell>パッケージ名</TableCell>
-                  <TableCell>バージョン</TableCell>
                   <TableCell>ライセンス</TableCell>
                   <TableCell>リンク</TableCell>
                 </TableRow>
@@ -111,7 +110,6 @@ export function LicenseDialog({
                 {licenses.map((pkg) => (
                   <TableRow key={`${pkg.name}@${pkg.version}`}>
                     <TableCell>{pkg.name}</TableCell>
-                    <TableCell>{pkg.version}</TableCell>
                     <TableCell>{pkg.license}</TableCell>
                     <TableCell>
                       {pkg.repository && (
