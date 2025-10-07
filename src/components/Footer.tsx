@@ -13,6 +13,14 @@ export function Footer(): React.ReactElement {
         <Typography variant="caption">
           ※入力した情報がインターネットに送信される事はありません。お手元の端末で処理されます。
         </Typography>
+        <Typography variant="body2" sx={{ my: 1 }}>
+          Developed by{' '}
+          <Link href="https://jun-murakami.com" target="_blank">
+            Jun Murakami
+          </Link>
+          .
+        </Typography>
+
         <Typography
           variant="body2"
           sx={{
@@ -22,7 +30,6 @@ export function Footer(): React.ReactElement {
             alignItems: 'center',
           }}
         >
-          Developed by Jun Murakami. （
           <Link
             onClick={() =>
               window.open(
@@ -43,7 +50,16 @@ export function Footer(): React.ReactElement {
           >
             オープンソースライセンス
           </Link>
-          ）
+          |
+          <Link
+            component="button"
+            onClick={() =>
+              window.open('https://github.com/Jun-Murakami/yomigana3', '_blank')
+            }
+            sx={{ cursor: 'pointer', mx: 1 }}
+          >
+            GitHub
+          </Link>
         </Typography>
         <Typography variant="caption" sx={{ mt: 1 }}></Typography>
       </Stack>
