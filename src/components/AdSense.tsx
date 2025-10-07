@@ -20,7 +20,7 @@ export function AdSense({
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9605694766716751"
-        strategy="afterInteractive"
+        crossOrigin="anonymous"
       />
       <ins
         className="adsbygoogle"
