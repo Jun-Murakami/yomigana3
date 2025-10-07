@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { M_PLUS_1_Code } from 'next/font/google';
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
+import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { ThemeRegistry } from '@/components/ThemeRegistry';
@@ -48,6 +49,12 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className={mPlus1.variable}>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9605694766716751"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         {/* must come before the <main> element */}
         <InitColorSchemeScript attribute="class" />
         <ThemeRegistry>{children}</ThemeRegistry>

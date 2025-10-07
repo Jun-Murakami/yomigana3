@@ -17,11 +17,6 @@ export function AdSense({
 }: AdSenseProps) {
   return (
     <div style={{ textAlign: 'center', margin: '20px 0', ...style }}>
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9605694766716751"
-        crossOrigin="anonymous"
-      />
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
