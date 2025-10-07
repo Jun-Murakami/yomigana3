@@ -27,15 +27,15 @@
 - 半角スペースで分離する 　→このチェックを外すと、スペースで区切らずにすべての文字を繋げます。スペース区切りでの歌詞連続入力に 対応していないソフトでも、仮名変換機能のみを使うことができます。このチェックが外れている時、 上2つのオプションの設定は無効になります。
 
 ## Webアプリ版について
-(React版) https://yomiganaconverterreact.web.app/
-(「なでしこ」版) https://n3s.nadesi.com/widget.php?2028&run=1
+(React版) https://yomiganaconverterreact.web.app/  
+(「なでしこ」版) https://n3s.nadesi.com/widget.php?2028&run=1  
 
 ## License
 MIT License
 
 ## Information
-https://jun-murakami.com
-https://jun-murakami.web.app
-https://note.com/junmurakami
+https://jun-murakami.com  
+https://jun-murakami.web.app  
+https://note.com/junmurakami  
 
 by Jun Murakami
