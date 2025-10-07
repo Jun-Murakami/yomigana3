@@ -31,7 +31,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
       justifyContent="space-between"
       gap={2}
       flexWrap="nowrap"
-      sx={{ my: 4, width: '100%', maxWidth: '1200px' }}
+      sx={{ my: 2.5, width: '100%', maxWidth: '1200px' }}
     >
       <FormControlLabel
         control={

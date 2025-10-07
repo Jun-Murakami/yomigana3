@@ -12,6 +12,7 @@ import { HeaderTitle } from '@/components/HeaderTitle';
 import { TextAreas } from '@/components/TextAreas';
 import { OptionToggles, type OptionState } from '@/components/OptionToggles';
 import { Footer } from '@/components/Footer';
+import { BannerAd } from '@/components/AdSense';
 import { convertToHiraganaSegments } from '@/lib/convert';
 import { toggleHeE, toggleWaHa } from '@/lib/toggles';
 import { readFromClipboard, writeToClipboard } from '@/utils/clipboard';
@@ -131,6 +132,9 @@ export default function Page(): React.ReactElement {
           onChange={(p) => setOpts((prev) => ({ ...prev, ...p }))}
         />
       </Box>
+
+      {/* 広告エリア */}
+      <BannerAd slot="5500365657" />
 
       <Footer />
 

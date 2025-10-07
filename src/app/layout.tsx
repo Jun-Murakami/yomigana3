@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { M_PLUS_1_Code } from 'next/font/google';
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { ThemeRegistry } from '@/components/ThemeRegistry';
 
@@ -15,6 +15,29 @@ const mPlus1 = M_PLUS_1_Code({
 export const metadata: Metadata = {
   title: 'よみがなコンバーター',
   description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+  metadataBase: new URL('https://yomiganaconverterreact.web.app/'),
+  openGraph: {
+    title: 'よみがなコンバーター',
+    description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+    url: 'https://yomiganaconverterreact.web.app/',
+    siteName: 'よみがなコンバーター',
+    images: [
+      {
+        url: '/images/yomigana_ogp.png',
+        width: 1200,
+        height: 630,
+        alt: 'よみがなコンバーター',
+      },
+    ],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'よみがなコンバーター',
+    description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+    images: ['/images/yomigana_ogp.png'],
+  },
 };
 
 export default function RootLayout({
@@ -24,25 +47,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-94NSTE4CKF"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-94NSTE4CKF');
-          `}
-        </Script>
-      </head>
       <body className={mPlus1.variable}>
         {/* must come before the <main> element */}
         <InitColorSchemeScript attribute="class" />
         <ThemeRegistry>{children}</ThemeRegistry>
+        <GoogleAnalytics gaId="G-94NSTE4CKF" />
       </body>
     </html>
   );

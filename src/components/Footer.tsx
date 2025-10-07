@@ -10,9 +10,6 @@ export function Footer(): React.ReactElement {
   return (
     <>
       <Stack alignItems="center" sx={{ my: 3, color: 'text.secondary' }}>
-        <Typography variant="caption">
-          ※入力した情報がインターネットに送信される事はありません。お手元の端末で処理されます。
-        </Typography>
         <Typography variant="body2" sx={{ my: 1 }}>
           Developed by{' '}
           <Link href="https://jun-murakami.com" target="_blank">
