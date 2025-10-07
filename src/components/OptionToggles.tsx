@@ -28,9 +28,9 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
   return (
     <Box
       display="flex"
-      justifyContent="space-between"
+      justifyContent="center"
       gap={2}
-      flexWrap="nowrap"
+      flexWrap="wrap"
       sx={{ my: 2.5, width: '100%', maxWidth: '1200px' }}
     >
       <FormControlLabel
@@ -42,6 +42,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="英語を変換しない"
+        sx={{ whiteSpace: 'nowrap' }}
       />
       <FormControlLabel
         control={
@@ -52,6 +53,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="カタカナを変換しない"
+        sx={{ whiteSpace: 'nowrap' }}
       />
       <FormControlLabel
         control={
@@ -62,6 +64,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="拗音(ゃゅょゎぁぃぅぇぉ)を繋げる"
+        sx={{ whiteSpace: 'nowrap' }}
       />
       <FormControlLabel
         control={
@@ -72,6 +75,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="促音(っ)を繋げる"
+        sx={{ whiteSpace: 'nowrap' }}
       />
       <FormControlLabel
         control={
@@ -82,6 +86,7 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="半角スペースで分離する"
+        sx={{ whiteSpace: 'nowrap' }}
       />
     </Box>
   );
