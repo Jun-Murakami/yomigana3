@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yomigana Converter ver3
+----
+## What's this?
+丁寧に作ると意外に時間が掛かる、ボーカリスト用メロディ譜面(所謂「メロ譜」)の歌詞入力支援ツールです。
 
-## Getting Started
+既に出来上がっている漢字交じりの歌詞カードを、メロ譜に適したひらがな＆カタカナに再変換し、 SibeliusやFinale、MuseScoreといった譜面作成ソフトに流し込む使い方を想定しています。 特にスペース区切りで歌詞を連続入力できる機能を持ったソフトで便利に使えると思います。
 
-First, run the development server:
+かなり以前に制作したプログラムの改訂版になりますが、最近はNEUTRINOなど専用エディターを使わずに フリーの譜面ソフトと連携して節回しを自動生成するようなAIシンガーも登場しているので、 そういった用途でも助けになるように「は」←→「わ」変換機能などを追加しています。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How to
+基本的に、左側のテキストエリアに歌詞をペーストして「変換実行」をクリックするだけです。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+右側のテキストエリアによみがな変換＆スペースで区切られた歌詞がコンバートされるので、 それを順番に譜面ソフトにペーストしてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+テキストエリアは変換前も変換後も、いつでも編集可能です。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
+「は」←→「わ」相互変換ボタン 　→VOCALOIDやAIシンガーソフトなどで用いられる、発音用表記の切り替えを行います。 この機能はテキスト変換実行後でも常に相互に切り替え可能で、歌詞の流しこみ中にチェックボックスを クリックすることで、いつでも「は」と「わ」を見比べながら作業ができます。 v2.1から「わ」→「は」に戻す際に、元の歌詞で「わ」だった箇所は復元するようになりました。
+「へ」←→「え」相互変換ボタン *v2.1 new 　→同じく、「へ」←→「え」を相互に変換します。
+改行削除ボタン 　→一部のソフトへの対応と、より早く流し込みを行えるように改行を削除します。 この機能は取り消しが出来ないので、編集が済んでから実行することをお勧めします。
+Option
+英語を変換しない 　→チェックが入っていると、英語を変換せずにそのまま出力します。
+カタカナを変換しない 　→チェックが入っていると、カタカナをそのまま出力します。 カタカナ英語の多い歌詞などではチェックを入れたままの方が譜面の視認性が上がると思います。
+拗音(ゃゅょゎぁぃぅぇぉ)を繋げる 　→チェックが入っていると、拗音をスペースで区切らずに前の字に繋げます。歌詞に合わせて切り替えてください。
+促音(っ)を繋げる 　→チェックが入っていると、促音をスペースで区切らずに前の字に繋げます。
+半角スペースで分離する 　→このチェックを外すと、スペースで区切らずにすべての文字を繋げます。スペース区切りでの歌詞連続入力に 対応していないソフトでも、仮名変換機能のみを使うことができます。このチェックが外れている時、 上2つのオプションの設定は無効になります。
+Webアプリ版について
+(「なでしこ」版) https://n3s.nadesi.com/widget.php?2028&run=1
 
-## Learn More
+(React版) https://yomiganaconverterreact.web.app/
 
-To learn more about Next.js, take a look at the following resources:
+## License
+MIT License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Information
+https://jun-murakami.com
+https://jun-murakami.web.app
+https://note.com/junmurakami
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+by Jun Murakami
