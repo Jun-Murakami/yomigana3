@@ -1,0 +1,5 @@
+# kuromoji 辞書配置用プレースホルダ
+# 実運用時は kuromoji の辞書一式をこのディレクトリに配置してください。
+# 例: /public/kuromoji/dict/* (base.dat など)
+
+

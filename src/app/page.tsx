@@ -1,95 +1,148 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
+import * as React from 'react';
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  Container,
+  Stack,
+} from '@mui/material';
+import { HeaderTitle } from '@/components/HeaderTitle';
+import { TextAreas } from '@/components/TextAreas';
+import { OptionToggles, type OptionState } from '@/components/OptionToggles';
+import { Footer } from '@/components/Footer';
+import { convertToHiraganaSegments } from '@/lib/convert';
+import { toggleHeE, toggleWaHa } from '@/lib/toggles';
+import { readFromClipboard, writeToClipboard } from '@/utils/clipboard';
+
+export default function Page(): React.ReactElement {
+  // 入出力テキスト
+  const [input, setInput] = React.useState('');
+  const [output, setOutput] = React.useState('');
+
+  // オプション状態
+  const [opts, setOpts] = React.useState<OptionState>({
+    keepEnglish: true,
+    keepKatakana: true,
+    connectYouon: true,
+    connectSokuon: true,
+    splitWithHalfSpace: true,
+  });
+
+  // ローディング表示
+  const [loading, setLoading] = React.useState(false);
+
+  // 変換実行
+  const handleConvert = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await convertToHiraganaSegments(input, opts);
+      setOutput(result);
+    } finally {
+      setLoading(false);
+    }
+  }, [input, opts]);
+
+  // クリア（入力欄のみ）
+  const handleClear = React.useCallback(() => {
+    setInput('');
+  }, []);
+
+  // クリップボード
+  const handlePaste = React.useCallback(async () => {
+    const text = await readFromClipboard();
+    if (text != null) setInput(text);
+  }, []);
+
+  const handleCopy = React.useCallback(async () => {
+    await writeToClipboard(output);
+  }, [output]);
+
+  // は↔わ, へ↔え（双方向トグル）
+  const handleToggleWa = React.useCallback(() => {
+    setOutput((prev) => toggleWaHa(prev));
+  }, []);
+
+  const handleToggleHe = React.useCallback(() => {
+    setOutput((prev) => toggleHeE(prev));
+  }, []);
+
+  // 改行削除
+  const handleRemoveNewLines = React.useCallback(() => {
+    setOutput((prev) => prev.replace(/\r?\n/g, ''));
+  }, []);
+
+  // ショートカット
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const isMeta = e.ctrlKey || e.metaKey;
+      if (isMeta && e.key === 'Enter') {
+        e.preventDefault();
+        void handleConvert();
+      } else if (isMeta && e.shiftKey && (e.key === 'V' || e.key === 'v')) {
+        e.preventDefault();
+        void handlePaste();
+      } else if (isMeta && (e.key === 'B' || e.key === 'b')) {
+        e.preventDefault();
+        void handleCopy();
+      } else if (e.altKey && (e.key === 'W' || e.key === 'w')) {
+        e.preventDefault();
+        handleToggleWa();
+      } else if (e.altKey && (e.key === 'E' || e.key === 'e')) {
+        e.preventDefault();
+        handleToggleHe();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [handleConvert, handleCopy, handlePaste, handleToggleHe, handleToggleWa]);
+
+  // アプリ起動時に辞書を先読みして体感待ち時間を削減
+  React.useEffect(() => {
+    // 失敗しても画面に影響しないように握りつぶす
+    import('@/lib/kuroshiroLoader').then((m) =>
+      m.getKuroshiro().catch(() => undefined),
+    );
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Container maxWidth="xl">
+      <HeaderTitle />
+      <TextAreas
+        input={input}
+        output={output}
+        onChangeInput={setInput}
+        onChangeOutput={setOutput}
+        // 左側のボタン
+        onConvert={handleConvert}
+        onClear={handleClear}
+        onPaste={handlePaste}
+        // 右側のボタン
+        onToggleWa={handleToggleWa}
+        onToggleHe={handleToggleHe}
+        onRemoveNewLines={handleRemoveNewLines}
+        onCopy={handleCopy}
+      />
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        <OptionToggles
+          {...opts}
+          onChange={(p) => setOpts((prev) => ({ ...prev, ...p }))}
+        />
+      </Box>
+
+      <Footer />
+
+      <Backdrop
+        open={loading}
+        sx={{ color: '#fff', zIndex: (t) => t.zIndex.modal + 1 }}
+      >
+        <Stack alignItems="center" spacing={2}>
+          <CircularProgress color="inherit" />
+          解析中...
+        </Stack>
+      </Backdrop>
+    </Container>
   );
 }
