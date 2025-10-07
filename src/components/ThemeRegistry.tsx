@@ -33,7 +33,7 @@ function DarkModeToggle(): React.ReactElement {
   return (
     <Box
       sx={{
-        position: 'fixed',
+        position: 'absolute',
         top: 16,
         right: 16,
         zIndex: 1000,
