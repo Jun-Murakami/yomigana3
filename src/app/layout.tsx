@@ -14,12 +14,43 @@ const mPlus1 = M_PLUS_1_Code({
 });
 
 export const metadata: Metadata = {
-  title: 'よみがなコンバーター',
-  description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+  title: 'よみがなコンバーター | 歌詞の漢字をひらがな・カタカナに変換',
+  description:
+    '歌詞テキストの漢字をひらがな・カタカナに一括変換。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
+  keywords: [
+    'よみがな',
+    'ひらがな',
+    'カタカナ',
+    '変換',
+    '歌詞',
+    'DTM',
+    'ボーカロイド',
+    '譜面',
+    '無料',
+    'オンラインツール',
+  ],
+  authors: [{ name: 'Jun Murakami' }],
+  creator: 'Jun Murakami',
+  publisher: 'Jun Murakami',
   metadataBase: new URL('https://yomiganaconverterreact.web.app/'),
+  alternates: {
+    canonical: 'https://yomiganaconverterreact.web.app/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: 'よみがなコンバーター',
-    description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+    title: 'よみがなコンバーター | 歌詞の漢字をひらがな・カタカナに変換',
+    description:
+      '歌詞テキストの漢字をひらがな・カタカナに一括変換。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
     url: 'https://yomiganaconverterreact.web.app/',
     siteName: 'よみがなコンバーター',
     images: [
@@ -27,7 +58,7 @@ export const metadata: Metadata = {
         url: '/images/yomigana_ogp.png',
         width: 1200,
         height: 630,
-        alt: 'よみがなコンバーター',
+        alt: 'よみがなコンバーター - 歌詞の漢字をひらがな・カタカナに変換',
       },
     ],
     locale: 'ja_JP',
@@ -35,9 +66,20 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'よみがなコンバーター',
-    description: 'DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール',
+    title: 'よみがなコンバーター | 歌詞の漢字をひらがな・カタカナに変換',
+    description:
+      '歌詞テキストの漢字をひらがな・カタカナに一括変換。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
     images: ['/images/yomigana_ogp.png'],
+    creator: '@junmurakami',
+  },
+  verification: {
+    google: 'your-google-verification-code', // Google Search Console の認証コード
+  },
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 
