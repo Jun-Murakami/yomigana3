@@ -28,10 +28,10 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
   return (
     <Box
       display="flex"
-      justifyContent="center"
-      gap={2}
+      justifyContent="space-evenly"
+      gap={3}
       flexWrap="wrap"
-      sx={{ my: 2.5, width: '100%', maxWidth: '1200px' }}
+      sx={{ my: 2.5, width: '95%', maxWidth: '1300px' }}
     >
       <FormControlLabel
         control={
