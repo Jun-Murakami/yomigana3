@@ -1,8 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { CssBaseline, ThemeProvider, createTheme, useColorScheme } from '@mui/material';
-import { Box } from '@mui/material';
+import {
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+  useColorScheme,
+  Button,
+  Stack,
+} from '@mui/material';
 import { MaterialUISwitch } from './DarkModeSwitch';
 
 // テーマコンテキスト（ダークモード切替用）
@@ -25,8 +31,20 @@ function DarkModeToggle(): React.ReactElement {
 
   if (!mounted) return <></>;
 
+  const handleScrollToAbout = () => {
+    const aboutSection = document.getElementById('about-section');
+    if (aboutSection) {
+      // アドセンスが見切れないよう、少し上にオフセットしてスクロール
+      const rect = aboutSection.getBoundingClientRect();
+      const scrollTop = window.pageYOffset + rect.top - 160; // 200px上にオフセット
+      window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <Box
+    <Stack
+      direction="row"
+      spacing={1}
       sx={{
         position: 'absolute',
         top: 16,
@@ -34,12 +52,32 @@ function DarkModeToggle(): React.ReactElement {
         zIndex: 1000,
       }}
     >
-      <MaterialUISwitch checked={mode === 'dark'} onChange={() => setMode(mode === 'dark' ? 'light' : 'dark')} />
-    </Box>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={handleScrollToAbout}
+        sx={{
+          minWidth: 'auto',
+          px: 1.5,
+          py: 0.5,
+          fontSize: '0.75rem',
+        }}
+      >
+        使い方
+      </Button>
+      <MaterialUISwitch
+        checked={mode === 'dark'}
+        onChange={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+      />
+    </Stack>
   );
 }
 
-export function ThemeRegistry({ children }: { children: React.ReactNode }): React.ReactElement {
+export function ThemeRegistry({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -77,7 +115,7 @@ export function ThemeRegistry({ children }: { children: React.ReactNode }): Reac
           },
         },
       }),
-    []
+    [],
   );
 
   return (

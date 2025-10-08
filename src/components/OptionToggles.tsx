@@ -2,11 +2,11 @@ import type * as React from 'react';
 import { Box, FormControlLabel, Switch } from '@mui/material';
 
 export type OptionState = {
-  keepEnglish: boolean;
   keepKatakana: boolean;
   connectYouon: boolean;
   connectSokuon: boolean;
   splitWithHalfSpace: boolean;
+  splitEnglishWithSpace: boolean;
 };
 
 export type OptionTogglesProps = OptionState & {
@@ -18,11 +18,11 @@ export type OptionTogglesProps = OptionState & {
  */
 export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
   const {
-    keepEnglish,
     keepKatakana,
     connectYouon,
     connectSokuon,
     splitWithHalfSpace,
+    splitEnglishWithSpace,
     onChange,
   } = props;
   return (
@@ -33,17 +33,6 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
       flexWrap="wrap"
       sx={{ my: 2.5, width: '95%', maxWidth: '1300px' }}
     >
-      <FormControlLabel
-        control={
-          <Switch
-            size="small"
-            checked={keepEnglish}
-            onChange={(_, v) => onChange({ keepEnglish: v })}
-          />
-        }
-        label="英語を変換しない"
-        sx={{ whiteSpace: 'nowrap' }}
-      />
       <FormControlLabel
         control={
           <Switch
@@ -86,6 +75,17 @@ export function OptionToggles(props: OptionTogglesProps): React.ReactElement {
           />
         }
         label="半角スペースで分離する"
+        sx={{ whiteSpace: 'nowrap' }}
+      />
+      <FormControlLabel
+        control={
+          <Switch
+            size="small"
+            checked={splitEnglishWithSpace}
+            onChange={(_, v) => onChange({ splitEnglishWithSpace: v })}
+          />
+        }
+        label="英語を半角スペースで分離する"
         sx={{ whiteSpace: 'nowrap' }}
       />
     </Box>

@@ -13,6 +13,7 @@ import { TextAreas } from '@/components/TextAreas';
 import { OptionToggles, type OptionState } from '@/components/OptionToggles';
 import { Footer } from '@/components/Footer';
 import { BannerAd } from '@/components/AdSense';
+import { AboutSection } from '@/components/AboutSection';
 import { convertToHiraganaSegments } from '@/lib/convert';
 import { toggleHeE, toggleWaHa } from '@/lib/toggles';
 import { readFromClipboard, writeToClipboard } from '@/utils/clipboard';
@@ -24,11 +25,11 @@ export default function Page(): React.ReactElement {
 
   // オプション状態
   const [opts, setOpts] = React.useState<OptionState>({
-    keepEnglish: true,
     keepKatakana: true,
     connectYouon: true,
     connectSokuon: true,
     splitWithHalfSpace: true,
+    splitEnglishWithSpace: false,
   });
 
   // ローディング表示
@@ -135,6 +136,9 @@ export default function Page(): React.ReactElement {
 
       {/* 広告エリア */}
       <BannerAd slot="5500365657" />
+
+      {/* コンテンツ充実化 */}
+      <AboutSection />
 
       <Footer />
 

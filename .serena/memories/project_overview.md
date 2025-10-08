@@ -1,0 +1,6 @@
+# Yomigana Converter ver3
+- **Purpose**: Web tool to convert lyric text containing kanji into hiragana/katakana segmented for score-writing software (e.g., Sibelius, MuseScore). Mimics legacy CRA version while moving transformation fully client-side.
+- **Key features**: Hiragana conversion via kuroshiro, optional preservation of English/Katakana, toggles for は↔わ and へ↔え with masks, options to join youon/sokuon or strip line breaks, local clipboard helpers.
+- **Tech stack**: Next.js 15 App Router configured for static export, React 19, TypeScript strict mode, MUI v7 for UI, Emotion styling, kuroshiro + kuromoji analyzer with bundled dictionaries in `public/kuromoji/dict`.
+- **App structure**: Single-page app in `src/app/page.tsx` composing UI from `src/components/*` (header, text areas, option toggles, footer). Conversion logic and toggles stored in `src/lib`. Utilities (clipboard) in `src/utils`.
+- **Deployment target**: Static export (`next export`) published to Firebase Hosting (see `firebase.json`).

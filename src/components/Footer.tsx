@@ -29,15 +29,12 @@ export function Footer(): React.ReactElement {
         >
           <Link
             onClick={() =>
-              window.open(
-                'https://note.com/junmurakami/n/n35cd70b8dc12',
-                '_blank',
-              )
+              window.open('https://jun-murakami.web.app', '_blank')
             }
             component="button"
             sx={{ mx: 1 }}
           >
-            解説記事＆ご意見はこちらまで
+            ほかのアプリやツール
           </Link>
           |
           <Link

@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'よみがなコンバーター | 歌詞の漢字をひらがな・カタカナに変換',
+    title: 'よみがなコンバーター | 歌詞の漢字をひらがなに変換',
     description:
-      '歌詞テキストの漢字をひらがな・カタカナに一括変換。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
+      '歌詞テキストの漢字をひらがなに一括変換し、スペースを挿入します。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
     url: 'https://yomiganaconverterreact.web.app/',
     siteName: 'よみがなコンバーター',
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
         url: '/images/yomigana_ogp.png',
         width: 1200,
         height: 630,
-        alt: 'よみがなコンバーター - 歌詞の漢字をひらがな・カタカナに変換',
+        alt: 'よみがなコンバーター - 歌詞の漢字をひらがなに変換',
       },
     ],
     locale: 'ja_JP',
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'よみがなコンバーター | 歌詞の漢字をひらがな・カタカナに変換',
+    title: 'よみがなコンバーター | 歌詞の漢字をひらがなに変換',
     description:
-      '歌詞テキストの漢字をひらがな・カタカナに一括変換。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
+      '歌詞テキストの漢字をひらがなに一括変換し、スペースを挿入します。DTM・ボーカロイド・譜面ソフト対応。無料でオフライン動作。',
     images: ['/images/yomigana_ogp.png'],
     creator: '@junmurakami',
   },
