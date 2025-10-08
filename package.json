@@ -1,7 +1,18 @@
 {
   "name": "yomigana3",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Jun Murakami",
+    "url": "https://jun-murakami.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jun-Murakami/yomigana3"
+  },
+  "homepage": "https://yomigana3.jun-murakami.com",
+  "keywords": ["yomigana", "converter", "kana", "converter", "kana converter", "kana converter online", "kana converter free", "kana converter tool", "kana converter app", "kana converter website", "kana converter online free", "kana converter online tool", "kana converter online app", "kana converter online website"],
   "scripts": {
     "dev": "next dev --turbopack",
     "prebuild": "node scripts/generate-licenses.js",

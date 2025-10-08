@@ -8,6 +8,7 @@ import {
   useColorScheme,
   Button,
   Stack,
+  Box,
 } from '@mui/material';
 import { MaterialUISwitch } from './DarkModeSwitch';
 
@@ -121,7 +122,10 @@ export function ThemeRegistry({
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <DarkModeToggle />
+      {/* デスクトップサイズでのみ表示 */}
+      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <DarkModeToggle />
+      </Box>
       {children}
     </ThemeProvider>
   );

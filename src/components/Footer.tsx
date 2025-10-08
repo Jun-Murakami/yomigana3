@@ -42,7 +42,7 @@ export function Footer(): React.ReactElement {
             onClick={() => setLicenseOpen(true)}
             sx={{ cursor: 'pointer', mx: 1 }}
           >
-            オープンソースライセンス
+            OSSライセンス
           </Link>
           |
           <Link
