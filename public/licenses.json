@@ -320,6 +320,14 @@
     "url": ""
   },
   {
+    "name": "@next/third-parties@15.5.4",
+    "version": "unknown",
+    "license": "MIT",
+    "repository": "https://github.com/vercel/next.js",
+    "publisher": "",
+    "url": ""
+  },
+  {
     "name": "@popperjs/core@2.11.8",
     "version": "unknown",
     "license": "MIT",
@@ -824,6 +832,14 @@
     "url": ""
   },
   {
+    "name": "third-party-capital@1.0.20",
+    "version": "unknown",
+    "license": "ISC",
+    "repository": "https://github.com/housseindjirdeh/third-party-capital",
+    "publisher": "",
+    "url": ""
+  },
+  {
     "name": "tslib@2.8.1",
     "version": "unknown",
     "license": "0BSD",
@@ -840,12 +856,12 @@
     "url": ""
   },
   {
-    "name": "yomigana3@0.1.0",
+    "name": "yomigana3@1.0.0",
     "version": "unknown",
     "license": "UNLICENSED",
-    "repository": "",
-    "publisher": "",
-    "url": ""
+    "repository": "https://github.com/Jun-Murakami/yomigana3",
+    "publisher": "Jun Murakami",
+    "url": "https://jun-murakami.com"
   },
   {
     "name": "zlibjs@0.3.1",
