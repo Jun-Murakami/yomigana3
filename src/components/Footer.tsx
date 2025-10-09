@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Link, Stack, Typography } from '@mui/material';
+
 import { LicenseDialog } from './LicenseDialog';
 
 export function Footer(): React.ReactElement {

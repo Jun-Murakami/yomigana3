@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Typography, Stack, Button, Box } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
+
 import { MaterialUISwitch } from './DarkModeSwitch';
 
 /**
@@ -41,7 +42,7 @@ export function HeaderTitle(): React.ReactElement {
       <Typography variant="caption" sx={{ color: '#6c5ce7' }}>
         DTMメロディ譜面＆ボーカロイド歌詞入力支援ツール
       </Typography>
-      
+
       {/* スマホサイズでのみ表示されるボタンとスイッチ */}
       <Box sx={{ display: { xs: 'block', md: 'none' }, mt: 2 }}>
         <Stack

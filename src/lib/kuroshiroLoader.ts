@@ -3,7 +3,7 @@
 // - kuromoji の辞書ファイルは `public/kuromoji/dict` 配下に配置する前提です。
 // - 2回目以降の呼び出しは同一インスタンスを返して重複初期化を避けます。
 
-import type Kuroshiro from "kuroshiro";
+import type Kuroshiro from 'kuroshiro';
 
 let cached: Kuroshiro | null = null;
 
@@ -15,10 +15,11 @@ export async function getKuroshiro(): Promise<Kuroshiro> {
   if (cached) return cached;
 
   // 動的 import で初回ロード時のみ読み込みコストを払う
-  const [{ default: KuroshiroClass }, { default: KuromojiAnalyzer }] = await Promise.all([
-    import("kuroshiro"),
-    import("kuroshiro-analyzer-kuromoji"),
-  ]);
+  const [{ default: KuroshiroClass }, { default: KuromojiAnalyzer }] =
+    await Promise.all([
+      import('kuroshiro'),
+      import('kuroshiro-analyzer-kuromoji'),
+    ]);
 
   const ks = new KuroshiroClass();
   await ks.init(
@@ -26,12 +27,9 @@ export async function getKuroshiro(): Promise<Kuroshiro> {
       // KuromojiAnalyzer のコンストラクタは dictPath を受け取る（19行目参照）
       // 内部で kuromoji.builder({ dicPath: this._dictPath }) に渡される（39行目）
       // Next.js の public 配下: /public/kuromoji/dict/* → ブラウザから /kuromoji/dict/*
-      dictPath: "/kuromoji/dict/",
-    })
+      dictPath: '/kuromoji/dict/',
+    }),
   );
   cached = ks;
   return ks;
 }
-
-
-

@@ -4,7 +4,10 @@ declare module 'kuroshiro' {
     init(analyzer: unknown): Promise<void>;
     convert(
       str: string,
-      options?: { to?: 'hiragana' | 'katakana' | 'romaji'; mode?: 'normal' | 'spaced' | 'okurigana' | 'furigana' }
+      options?: {
+        to?: 'hiragana' | 'katakana' | 'romaji';
+        mode?: 'normal' | 'spaced' | 'okurigana' | 'furigana';
+      },
     ): Promise<string>;
   }
 }
@@ -14,4 +17,3 @@ declare module 'kuroshiro-analyzer-kuromoji' {
     constructor(options?: { dictPath?: string });
   }
 }
-

@@ -10,32 +10,53 @@ export type ConvertOptions = {
   splitEnglishWithSpace: boolean; // 英語に半角スペースを付ける
 };
 
-const YOUON = new Set(["ゃ", "ゅ", "ょ", "ゎ", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ"]);
-const SOKUON = "っ";
+const YOUON = new Set(['ゃ', 'ゅ', 'ょ', 'ゎ', 'ぁ', 'ぃ', 'ぅ', 'ぇ', 'ぉ']);
+const SOKUON = 'っ';
 // カタカナの拗音・促音
-const KATAKANA_YOUON = new Set(["ャ", "ュ", "ョ", "ヮ", "ァ", "ィ", "ゥ", "ェ", "ォ"]);
-const KATAKANA_SOKUON = "ッ";
+const KATAKANA_YOUON = new Set([
+  'ャ',
+  'ュ',
+  'ョ',
+  'ヮ',
+  'ァ',
+  'ィ',
+  'ゥ',
+  'ェ',
+  'ォ',
+]);
+const KATAKANA_SOKUON = 'ッ';
 
 // ASCII英数記号の連なりを簡易検出（スペースを含む連続した英語ブロック）
 const ASCII_BLOCK = /[A-Za-z0-9'-]+(?:\s+[A-Za-z0-9'-]+)*/g;
 
 // 日本語セグメントを処理して文字配列に変換（ひらがな・カタカナ両対応）
-function processJapaneseSegment(text: string, options: ConvertOptions): string[] {
+function processJapaneseSegment(
+  text: string,
+  options: ConvertOptions,
+): string[] {
   const chars = Array.from(text);
   const out: string[] = [];
 
   for (let i = 0; i < chars.length; i++) {
     const ch = chars[i];
-    const prev = out[out.length - 1] ?? "";
+    const prev = out[out.length - 1] ?? '';
 
     // 促音を直前に結合（ひらがな・カタカナ両方）
-    if (options.connectSokuon && (ch === SOKUON || ch === KATAKANA_SOKUON) && out.length > 0) {
+    if (
+      options.connectSokuon &&
+      (ch === SOKUON || ch === KATAKANA_SOKUON) &&
+      out.length > 0
+    ) {
       out[out.length - 1] = prev + ch;
       continue;
     }
 
     // 拗音を直前に結合（ひらがな・カタカナ両方）
-    if (options.connectYouon && (YOUON.has(ch) || KATAKANA_YOUON.has(ch)) && out.length > 0) {
+    if (
+      options.connectYouon &&
+      (YOUON.has(ch) || KATAKANA_YOUON.has(ch)) &&
+      out.length > 0
+    ) {
       out[out.length - 1] = prev + ch;
       continue;
     }
@@ -46,7 +67,7 @@ function processJapaneseSegment(text: string, options: ConvertOptions): string[]
   // 各文字の間にスペースを入れる
   return out.map((char, index) => {
     if (index === 0) return char;
-    return `${" "}${char}`;
+    return `${' '}${char}`;
   });
 }
 
@@ -55,9 +76,9 @@ function processJapaneseSegment(text: string, options: ConvertOptions): string[]
  */
 export async function convertToHiraganaSegments(
   input: string,
-  options: ConvertOptions
+  options: ConvertOptions,
 ): Promise<string> {
-  const { getKuroshiro } = await import("./kuroshiroLoader");
+  const { getKuroshiro } = await import('./kuroshiroLoader');
   const kuro = await getKuroshiro();
 
   // 1) 改行を保持するため、行ごとに処理
@@ -66,8 +87,8 @@ export async function convertToHiraganaSegments(
 
   for (const line of lines) {
     // 空行はそのまま保持
-    if (line.trim() === "") {
-      convertedLines.push("");
+    if (line.trim() === '') {
+      convertedLines.push('');
       continue;
     }
 
@@ -83,55 +104,139 @@ export async function convertToHiraganaSegments(
       return key;
     });
 
-
     // カタカナを事前にひらがなに変換（オプションがOFFの場合のみ）
     if (!options.keepKatakana) {
       work = work.replace(/[\p{Script=Katakana}ー]/gu, (char) => {
         // カタカナ→ひらがな変換テーブル（濁点、拗音、促音含む）
         const katakanaToHiragana: { [key: string]: string } = {
           // 基本文字
-          'ア': 'あ', 'イ': 'い', 'ウ': 'う', 'エ': 'え', 'オ': 'お',
-          'カ': 'か', 'キ': 'き', 'ク': 'く', 'ケ': 'け', 'コ': 'こ',
-          'サ': 'さ', 'シ': 'し', 'ス': 'す', 'セ': 'せ', 'ソ': 'そ',
-          'タ': 'た', 'チ': 'ち', 'ツ': 'つ', 'テ': 'て', 'ト': 'と',
-          'ナ': 'な', 'ニ': 'に', 'ヌ': 'ぬ', 'ネ': 'ね', 'ノ': 'の',
-          'ハ': 'は', 'ヒ': 'ひ', 'フ': 'ふ', 'ヘ': 'へ', 'ホ': 'ほ',
-          'マ': 'ま', 'ミ': 'み', 'ム': 'む', 'メ': 'め', 'モ': 'も',
-          'ヤ': 'や', 'ユ': 'ゆ', 'ヨ': 'よ',
-          'ラ': 'ら', 'リ': 'り', 'ル': 'る', 'レ': 'れ', 'ロ': 'ろ',
-          'ワ': 'わ', 'ヲ': 'を', 'ン': 'ん',
+          ア: 'あ',
+          イ: 'い',
+          ウ: 'う',
+          エ: 'え',
+          オ: 'お',
+          カ: 'か',
+          キ: 'き',
+          ク: 'く',
+          ケ: 'け',
+          コ: 'こ',
+          サ: 'さ',
+          シ: 'し',
+          ス: 'す',
+          セ: 'せ',
+          ソ: 'そ',
+          タ: 'た',
+          チ: 'ち',
+          ツ: 'つ',
+          テ: 'て',
+          ト: 'と',
+          ナ: 'な',
+          ニ: 'に',
+          ヌ: 'ぬ',
+          ネ: 'ね',
+          ノ: 'の',
+          ハ: 'は',
+          ヒ: 'ひ',
+          フ: 'ふ',
+          ヘ: 'へ',
+          ホ: 'ほ',
+          マ: 'ま',
+          ミ: 'み',
+          ム: 'む',
+          メ: 'め',
+          モ: 'も',
+          ヤ: 'や',
+          ユ: 'ゆ',
+          ヨ: 'よ',
+          ラ: 'ら',
+          リ: 'り',
+          ル: 'る',
+          レ: 'れ',
+          ロ: 'ろ',
+          ワ: 'わ',
+          ヲ: 'を',
+          ン: 'ん',
 
           // 濁音
-          'ガ': 'が', 'ギ': 'ぎ', 'グ': 'ぐ', 'ゲ': 'げ', 'ゴ': 'ご',
-          'ザ': 'ざ', 'ジ': 'じ', 'ズ': 'ず', 'ゼ': 'ぜ', 'ゾ': 'ぞ',
-          'ダ': 'だ', 'ヂ': 'ぢ', 'ヅ': 'づ', 'デ': 'で', 'ド': 'ど',
-          'バ': 'ば', 'ビ': 'び', 'ブ': 'ぶ', 'ベ': 'べ', 'ボ': 'ぼ',
+          ガ: 'が',
+          ギ: 'ぎ',
+          グ: 'ぐ',
+          ゲ: 'げ',
+          ゴ: 'ご',
+          ザ: 'ざ',
+          ジ: 'じ',
+          ズ: 'ず',
+          ゼ: 'ぜ',
+          ゾ: 'ぞ',
+          ダ: 'だ',
+          ヂ: 'ぢ',
+          ヅ: 'づ',
+          デ: 'で',
+          ド: 'ど',
+          バ: 'ば',
+          ビ: 'び',
+          ブ: 'ぶ',
+          ベ: 'べ',
+          ボ: 'ぼ',
 
           // 半濁音
-          'パ': 'ぱ', 'ピ': 'ぴ', 'プ': 'ぷ', 'ペ': 'ぺ', 'ポ': 'ぽ',
+          パ: 'ぱ',
+          ピ: 'ぴ',
+          プ: 'ぷ',
+          ペ: 'ぺ',
+          ポ: 'ぽ',
 
           // 拗音
-          'キャ': 'きゃ', 'キュ': 'きゅ', 'キョ': 'きょ',
-          'シャ': 'しゃ', 'シュ': 'しゅ', 'ショ': 'しょ',
-          'チャ': 'ちゃ', 'チュ': 'ちゅ', 'チョ': 'ちょ',
-          'ニャ': 'にゃ', 'ニュ': 'にゅ', 'ニョ': 'にょ',
-          'ヒャ': 'ひゃ', 'ヒュ': 'ひゅ', 'ヒョ': 'ひょ',
-          'ミャ': 'みゃ', 'ミュ': 'みゅ', 'ミョ': 'みょ',
-          'リャ': 'りゃ', 'リュ': 'りゅ', 'リョ': 'りょ',
-          'ギャ': 'ぎゃ', 'ギュ': 'ぎゅ', 'ギョ': 'ぎょ',
-          'ジャ': 'じゃ', 'ジュ': 'じゅ', 'ジョ': 'じょ',
-          'ビャ': 'びゃ', 'ビュ': 'びゅ', 'ビョ': 'びょ',
-          'ピャ': 'ぴゃ', 'ピュ': 'ぴゅ', 'ピョ': 'ぴょ',
+          キャ: 'きゃ',
+          キュ: 'きゅ',
+          キョ: 'きょ',
+          シャ: 'しゃ',
+          シュ: 'しゅ',
+          ショ: 'しょ',
+          チャ: 'ちゃ',
+          チュ: 'ちゅ',
+          チョ: 'ちょ',
+          ニャ: 'にゃ',
+          ニュ: 'にゅ',
+          ニョ: 'にょ',
+          ヒャ: 'ひゃ',
+          ヒュ: 'ひゅ',
+          ヒョ: 'ひょ',
+          ミャ: 'みゃ',
+          ミュ: 'みゅ',
+          ミョ: 'みょ',
+          リャ: 'りゃ',
+          リュ: 'りゅ',
+          リョ: 'りょ',
+          ギャ: 'ぎゃ',
+          ギュ: 'ぎゅ',
+          ギョ: 'ぎょ',
+          ジャ: 'じゃ',
+          ジュ: 'じゅ',
+          ジョ: 'じょ',
+          ビャ: 'びゃ',
+          ビュ: 'びゅ',
+          ビョ: 'びょ',
+          ピャ: 'ぴゃ',
+          ピュ: 'ぴゅ',
+          ピョ: 'ぴょ',
 
           // 促音
-          'ッ': 'っ',
+          ッ: 'っ',
 
           // 小文字
-          'ァ': 'ぁ', 'ィ': 'ぃ', 'ゥ': 'ぅ', 'ェ': 'ぇ', 'ォ': 'ぉ',
-          'ャ': 'ゃ', 'ュ': 'ゅ', 'ョ': 'ょ', 'ヮ': 'ゎ',
+          ァ: 'ぁ',
+          ィ: 'ぃ',
+          ゥ: 'ぅ',
+          ェ: 'ぇ',
+          ォ: 'ぉ',
+          ャ: 'ゃ',
+          ュ: 'ゅ',
+          ョ: 'ょ',
+          ヮ: 'ゎ',
 
           // 長音符
-          'ー': 'ー'
+          ー: 'ー',
         };
         return katakanaToHiragana[char] || char;
       });
@@ -147,8 +252,8 @@ export async function convertToHiraganaSegments(
     // 2) kuroshiro でひらがな化（漢字のみ）
     console.log('Before kuroshiro:', work);
     const hira = (await kuro.convert(work, {
-      to: "hiragana",
-      mode: "normal",
+      to: 'hiragana',
+      mode: 'normal',
     })) as string;
     console.log('After kuroshiro:', hira);
 
@@ -173,7 +278,7 @@ export async function convertToHiraganaSegments(
     // 4) スペース制御
     if (!options.splitWithHalfSpace) {
       // 完全連結（行内のスペースのみ除去、改行は保持）
-      let result = restored.replace(/\s+/g, "");
+      let result = restored.replace(/\s+/g, '');
       // 英語とカタカナを復元（スペースなし）
       for (const s of englishSlots) {
         result = result.replaceAll(s.key, s.value);
@@ -194,9 +299,9 @@ export async function convertToHiraganaSegments(
         for (const s of englishSlots) {
           // スペースで分割して、各単語内の文字をスペース区切りにする
           const words = s.value.split(/\s+/);
-          const spacedWords = words.map(word => Array.from(word).join(" "));
+          const spacedWords = words.map((word) => Array.from(word).join(' '));
           // 単語間は元のスペースを保持（ここでは単一スペースで結合）
-          const spacedValue = spacedWords.join(" ");
+          const spacedValue = spacedWords.join(' ');
           processedText = processedText.replaceAll(s.key, spacedValue);
         }
       } else {
@@ -210,7 +315,7 @@ export async function convertToHiraganaSegments(
       for (const s of katakanaSlots) {
         // カタカナも日本語と同じように文字分割処理
         const katakanaSegments = processJapaneseSegment(s.value, options);
-        const katakanaResult = katakanaSegments.join("");
+        const katakanaResult = katakanaSegments.join('');
         processedText = processedText.replaceAll(s.key, katakanaResult);
       }
 
@@ -220,7 +325,9 @@ export async function convertToHiraganaSegments(
       let lastIndex = 0;
 
       // 英語ブロックを検出して処理
-      const englishMatches = [...processedText.matchAll(/[A-Za-z0-9'-]+(?:\s+[A-Za-z0-9'\-]+)*/g)];
+      const englishMatches = [
+        ...processedText.matchAll(/[A-Za-z0-9'-]+(?:\s+[A-Za-z0-9'-]+)*/g),
+      ];
 
       for (const match of englishMatches) {
         const matchIndex = match.index ?? 0;
@@ -247,10 +354,10 @@ export async function convertToHiraganaSegments(
       }
 
       // セグメントを結合（日本語部分は既にスペース付きで返される）
-      const result = segments.join(" ").replace(/\s+/g, " ").trim();
+      const result = segments.join(' ').replace(/\s+/g, ' ').trim();
       convertedLines.push(result);
     }
   }
 
-  return convertedLines.join("\n");
+  return convertedLines.join('\n');
 }

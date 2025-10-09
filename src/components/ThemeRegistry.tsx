@@ -2,14 +2,15 @@
 
 import * as React from 'react';
 import {
-  CssBaseline,
-  ThemeProvider,
-  createTheme,
-  useColorScheme,
-  Button,
-  Stack,
   Box,
+  Button,
+  CssBaseline,
+  createTheme,
+  Stack,
+  ThemeProvider,
+  useColorScheme,
 } from '@mui/material';
+
 import { MaterialUISwitch } from './DarkModeSwitch';
 
 // テーマコンテキスト（ダークモード切替用）

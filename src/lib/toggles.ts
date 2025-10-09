@@ -14,13 +14,13 @@ export function toggleWaHa(text: string): string {
   const chars = Array.from(text);
   for (let i = 0; i < chars.length; i++) {
     const ch = chars[i];
-    if (ch === "は") {
-      chars[i] = "わ";
-    } else if (ch === "わ") {
-      chars[i] = "は";
+    if (ch === 'は') {
+      chars[i] = 'わ';
+    } else if (ch === 'わ') {
+      chars[i] = 'は';
     }
   }
-  return chars.join("");
+  return chars.join('');
 }
 
 /**
@@ -31,14 +31,11 @@ export function toggleHeE(text: string): string {
   const chars = Array.from(text);
   for (let i = 0; i < chars.length; i++) {
     const ch = chars[i];
-    if (ch === "へ") {
-      chars[i] = "え";
-    } else if (ch === "え") {
-      chars[i] = "へ";
+    if (ch === 'へ') {
+      chars[i] = 'え';
+    } else if (ch === 'え') {
+      chars[i] = 'へ';
     }
   }
-  return chars.join("");
+  return chars.join('');
 }
-
-
-

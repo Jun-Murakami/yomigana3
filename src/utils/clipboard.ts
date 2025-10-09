@@ -15,10 +15,8 @@ export async function writeToClipboard(text: string): Promise<boolean> {
 export async function readFromClipboard(): Promise<string | null> {
   try {
     const text = await navigator.clipboard.readText();
-    return text ?? "";
+    return text ?? '';
   } catch {
     return null;
   }
 }
-
-

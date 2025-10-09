@@ -1,24 +1,24 @@
 'use client';
 
 import * as React from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 import {
+  Box,
+  CircularProgress,
   Dialog,
-  DialogTitle,
   DialogContent,
+  DialogTitle,
   IconButton,
+  Link,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Link,
-  CircularProgress,
-  Box,
   Typography,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 
 type LicenseInfo = {
   name: string;

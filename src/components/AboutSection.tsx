@@ -1,8 +1,7 @@
 'use client';
 
-import type * as React from 'react';
-import { Box, Typography, Paper, Stack, Divider } from '@mui/material';
-import { MusicNote, Translate, Speed } from '@mui/icons-material';
+import { MusicNote, Speed, Translate } from '@mui/icons-material';
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
 
 export function AboutSection(): React.ReactElement {
   return (
