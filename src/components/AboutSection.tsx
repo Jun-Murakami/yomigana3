@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { MusicNote, Speed, Translate } from '@mui/icons-material';
 import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
 
@@ -16,9 +17,21 @@ export function AboutSection(): React.ReactElement {
           よみがなコンバーターについて
         </Typography>
         <Typography variant="body1" paragraph>
-          よみがなコンバーターは、歌詞テキストの漢字をひらがなに一括変換し、間にスペースを挿入する無料のオンラインツールです。
-          DTM・ボーカロイド・譜面ソフトでの歌詞入力作業を効率化します。
+          よみがなコンバーターは、歌詞テキストの漢字をひらがなに一括変換し、間にスペースを挿入する無料のDTMオンラインツールです。
+          <br />
+          漢字交じりの歌詞カードを、メロ譜に適したひらがな＆カタカナに一発再変換します。SibeliusやMuseScoreといった譜面作成ソフトをはじめ、DAWやボーカロイド系エディタに流し込む使い方を想定しています。
+          特に、スペース区切りで歌詞を連続入力できる機能を持ったソフトで便利に使えると思います。
         </Typography>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Image
+            src="/images/yomigana_sc.jpg"
+            alt="よみがなコンバーター"
+            width={800}
+            height={409}
+            style={{ maxWidth: '800px', width: '100%', height: 'auto' }}
+          />
+        </Box>
 
         <Typography
           variant="h6"
