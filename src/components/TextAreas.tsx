@@ -44,7 +44,7 @@ export function TextAreas(props: TextAreasProps): React.ReactElement {
           <Typography variant="h6">■ 歌詞テキスト</Typography>
           <TextField
             multiline
-            minRows={3}
+            minRows={18}
             maxRows={18}
             value={input}
             onChange={(
@@ -90,7 +90,7 @@ export function TextAreas(props: TextAreasProps): React.ReactElement {
           <Typography variant="h6">■ 変換後テキスト</Typography>
           <TextField
             multiline
-            minRows={3}
+            minRows={18}
             maxRows={18}
             value={output}
             onChange={(
